@@ -34,7 +34,7 @@ function App() {
   
   axios.get('https://api.calorieninjas.com/v1/nutrition?query=' + name , { 
     headers: {
-       "X-Api-Key": "AFLlI8M6Jy226TwL1WMZ25fmAEGKQNcvjl722zDs"
+       "X-Api-Key": "ENTER YOUR API-KEY HERE"
       }
     })
   .then(response => {
