@@ -1,0 +1,179 @@
+import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import { CssBaseline } from "@mui/material";
+import { FastForward } from "@mui/icons-material";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import { Input } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+
+
+//FETCH FUNCTION
+
+
+
+function App() {
+  const [name, setName] = useState('');
+	const [res, setRes] = useState(null);
+
+
+
+
+  return (
+    <div className="App">
+      <CssBaseline />
+      <AppBar position="static">
+        <Toolbar variant="dense" color="black">
+          <FastfoodIcon />
+          <Box m={1} pt={1}>
+            <Typography
+              variant="h4"
+              color="white"
+              align="center"
+              component="div"
+            >
+              SIMPLE FOOD SEARCH & CALCULATOR
+            </Typography>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="3vh"
+      >
+        
+        <Input placeholder="Enter Name of Any Food" onChange={e => setName(e.target.value)}></Input>
+        <Button
+          onClick={fetchNutrients}
+          sx={{
+            height: 33,
+          }}
+          variant="outlined"
+        >
+          Search
+        </Button>
+      </Box>
+      
+    <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="10vh"
+        
+      >
+        <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>NUTRIENT (100g serving)</TableCell>
+            <TableCell align="right">Quantity</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+        <TableRow>
+									<TableCell>
+										Protein
+									</TableCell>
+									<TableCell>
+										 mg
+									</TableCell>
+								</TableRow>
+                <TableRow>
+									<TableCell>
+										Carbohydrates
+									</TableCell>
+									<TableCell>
+                   g
+									</TableCell>
+								</TableRow>
+                <TableRow>
+									<TableCell>
+										Chlosterol
+									</TableCell>
+									<TableCell>
+										 mg
+									</TableCell>
+								</TableRow>
+                <TableRow>
+									<TableCell>
+										Total Fat
+									</TableCell>
+									<TableCell>
+									 g
+									</TableCell>
+								</TableRow>
+                <TableRow>
+									<TableCell>
+										Sugar
+									</TableCell>
+									<TableCell>
+										 mg
+									</TableCell>
+								</TableRow>
+                <TableRow>
+									<TableCell>
+										Potassium
+									</TableCell>
+									<TableCell>
+										 mg
+									</TableCell>
+								</TableRow>
+                <TableRow>
+									<TableCell>
+										Sodium
+									</TableCell>
+									<TableCell>
+										 mg
+									</TableCell>
+								</TableRow>
+        <TableRow>
+									<TableCell>
+										Calories
+									</TableCell>
+									<TableCell>
+										 mg
+									</TableCell>
+								</TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+      </Box>
+    </div>
+  );
+}
+/**
+	 *
+	 *
+	 * Fetch nutrient information of a given food
+	 */
+ const fetchNutrients = async e => {
+  e.preventDefault();
+  try {
+    const res = await axios.get(`/api/nutrient`, {
+      params: {
+        name
+      }
+    });
+    setRes(res.data.items[0]);
+  } catch (err) {
+    console.log(err);
+  }
+};
+export default App;
