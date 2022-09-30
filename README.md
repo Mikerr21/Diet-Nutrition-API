@@ -3,4 +3,4 @@ This following repository contains some Material-UI design mixed with the axios 
 Website contains an input that takes the value and send it to the API query whenever someone presses the button.
 The input value then is put into the API to search for the nutrients of that given food. ( e.g apple, egg, chicken breast) which will be displayed in a table of rows and cells using material-UI.
 
-"proxy":"localhost:3000" helps to not block access and avoid getting CORS problems.
+"proxy":"localhost:3000" in package.json helps to not block access and avoid getting CORS problems.
